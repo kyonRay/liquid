@@ -33,7 +33,7 @@ impl From<TokenizeError> for ParseError {
     fn from(err: TokenizeError) -> Self {
         match err {
             TokenizeError::IllegalNumber { provided, pos } => Self::new(
-                format!("illegal representation of number: `{}`", provided),
+                format!("illegal representation of number: `{provided}`"),
                 Span::new(pos, provided.len()),
             ),
             TokenizeError::UnexpectedCharacter {
@@ -42,8 +42,8 @@ impl From<TokenizeError> for ParseError {
                 pos,
             } => Self::new(
                 format!(
-                    "found unexpected character: expected `{}` but found `{}`",
-                    expected, provided
+                    "found unexpected character: expected `{expected}` but found \
+                     `{provided}`"
                 ),
                 Span::new(pos, 1),
             ),
